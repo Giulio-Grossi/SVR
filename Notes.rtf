@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red136\green255\blue255;\red255\green255\blue255;\red28\green27\blue0;
+\red252\green41\blue19;\red194\green0\blue4;\red255\green255\blue255;\red252\green41\blue19;\red194\green0\blue4;
+}
+{\*\expandedcolortbl;;\cssrgb\c59016\c100000\c100000;\cssrgb\c100000\c100000\c99985;\cssrgb\c14868\c14010\c0;
+\cssrgb\c100000\c25745\c7993;\cssrgb\c81490\c4389\c0;\cssrgb\c100000\c100000\c100000\c0;\cssrgb\c100000\c25745\c7993;\cssrgb\c81490\c4389\c0;
+}
+\margl1440\margr1440\vieww22980\viewh15980\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Notes:\
+\
+I have looked at\
+	sim_july.R\
+	hpg_apr.R\
+	est_model.R\
+\
+I ignored\
+	Functions/synth\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 	Functions/tcv_ridge\
+	Functions/x_matrix\
+	Functions/ridge\
+	Functions/fused\
+	Functions/tcv_fused\
+	Functions/cv_fused\
+\
+The remaining files I have not considered yet.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\cb2 % \'97\'97\'97\'97\'97\'97\'97\'97 For the sim_july.R file \'97\'97\'97\'97\'97\'97\'97\'97 %\
+\cb1 \
+completed.\
+\
+\'97 When generating the controls \'97\
+\
+a) The time series of the controls is always generated as T points on the [0, 1] interval. This means that the range parameter (tt_range) will imply different correlations when we generate, let\'92s say, 10 vs 20 time periods. We should use the same T to generate controls across all simulations.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf3 \cb4 I fixed this.\cf0 \cb1  I include now time_periods_controls to specify how many time periods we will use for the controls. I use time_periods_controls = 80. Then we truncate to time_periods for the actual number of time periods we want to consider.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+b) I changed a little the parameters used to generate the controls, and I made them a little temporally correlated.\
+\
+\cb5 TO DO (2):\cb1  Go through all the same checks we did with variance of the controls etc to see whether everything is ok.\
+\
+\
+\'97 When generating the true coefficients \'97\
+\
+For sp_range we should use 0.001, 0.3, 0.6.\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \cb2 % \'97\'97\'97\'97\'97\'97\'97\'97 For the hpg_apr.R file \'97\'97\'97\'97\'97\'97\'97\'97 %\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \cb1 \
+working on it.\
+\
+\
+\cb2 % \'97\'97\'97\'97\'97\'97\'97\'97 For the est_mode.R file \'97\'97\'97\'97\'97\'97\'97\'97 %\
+\cb1 \
+I checked the methods	 SC, SR, PR, OLS, BVR, BSC\
+I did not check		 FR, GP, PVN\
+Pending 			 MGP\
+\
+\
+\cb6 Question \cb7  Is there a reason why separate ridge and pooled ridge are estimated differently? Why use cv.glmnet for separate ridge and tcv.ridge for pooled ridge?\
+\
+\
+For the Pooled ridge:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \cb8 TO DO (3):\cb1  @Giulio, please double-check the pooled ridge code. I see the following:\
+\
+- for the choice of penalty:\
+on line 84, you use tcv_ridge on sim, which includes post-intervention data. Shouldn\'92t we be finding the optimal lambda only in the pre-intervention period? Maybe the argument \'93train\'94 achieves that. But still, in sim we have both treated and control units. Shouldn\'92t we be trying to fit the treated units only?\
+\cb7 \
+- for the results:\
+the results of the pooled ridge (line 88) is a matrix of dimension (# bands) x (# controls + 1). I believe this includes the intercept and the coefficient for each control for EACH of the outcomes. Shouldn\'92t we have ONE coefficient for each control across all outcomes? I believe the problem might be with the x_matrix() function.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+For the fused ridge.\
+\
+I didn\'92t check the code. \cb9 Question \cb7 Do we use it?\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 For the GP and PVN models.\
+\
+I don\'92t have alpha.stan or vanilla_alpha.stan so I could not check them. \cb9 Question \cb7 Do we use them?\
+Also, I see that in both you use \'93as.numeric(scale(treated_radius))\'94 which \cb5 we should NOT\cb7  be using.\
+\
+\
+For the OLS.\
+\
+\cb8 TO DO (4):\cb1  \cb7 The OLS code is wrong, and it has to do with the definition of the tx matrix. Previously, you were using x_matrix(x.pre) to get this. I fixed it. LOOK AT THIS CAREFULLY. This might be the same mistake for pooled ridge.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+For BVR and BSC\
+\
+- We use standardized data so I changed the priors to make them less informative but uninformative enough for the range of the data\
+- Inverse gamma prior is always on the variance, not on the standard deviation. I changed that.\
+\
+\
+For MGP\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \cb8 TO DO (5):\cb1  We need to talk.\cb7 \
+}
