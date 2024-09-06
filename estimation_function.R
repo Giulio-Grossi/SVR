@@ -173,7 +173,7 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
     }
     
     lmod <- lm(yv.pre ~ tx)
-    giulio$OLS <- lmod$coef
+    giulio$pooledOLS <- lmod$coef
   }
   
   
