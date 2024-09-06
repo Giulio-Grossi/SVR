@@ -45,18 +45,10 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   ### 1.0 SEPARATED SCM
   
   if ("SC" %in% method){
-    c.sep.scm = vector()
-    
-    for (i in 1:bands) {
-      v = ym.pre[,i]
-      gg = SCM(v, x.pre)
-      c.sep.scm=cbind(c.sep.scm, gg)
-    }
-    dimnames(c.sep.scm) <- list(control = 1 : num_controls, treated = 1 : bands)
-    giulio$SC = c.sep.scm
+    giulio$SC = sepSC(ym.pre = ym.pre, x.pre = x.pre)
+    print("sc")
   }
-  print("sc")
-  
+
   
   ### 2- Separate ridge estimation
   
@@ -79,7 +71,7 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   
   ### 3 - Pooled ridge regression.
   
-  if ("PR" %in% method){
+  if ("PR" %in% method){  # We do not use this currently.
     
     # THIS FUNCTION IS NOT CURRENTLY USED.
     # If we use it again, we MUST check the following:
@@ -109,9 +101,8 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   
   
   ## 3- FUSED RIDGE
-  # -GP- I did not check this.
-  
-  if ("FR" %in% method){
+
+  if ("FR" %in% method){  # We are not using it, but could be interesting for future.
     l1=seq(0.01,10,0.01)
     l2=0
     l=tcv_fused(sim,x,l1,l2, SCM=F,train)
@@ -129,6 +120,8 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   # -GP- I don't have alpha.stan. So I could not check this part.
 
   if ("GP" %in% method) {
+    
+    warning('GP not checked.')
     
     ss_data = list(
       x = x_matrix_int(cbind(1, x.pre)),
