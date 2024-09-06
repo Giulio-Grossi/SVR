@@ -13,12 +13,12 @@ index<-as.numeric(args[4])
 set.seed(index)
 puppi=index
 
-setwd('~/Documents/Research/Students/Giulio/Sims_Aug2024/')
+setwd('~/Github/SMAC/')
 
 # Sourcing in code from other files.
-source("sim_july.R")
-source("preset.R")
-source("est_mode.R")
+source("sim_model_function.R")
+source("estimation_function.R")
+source("preset_function.R")
 
 
 #------- -GP- I did not check the following functions --------- #

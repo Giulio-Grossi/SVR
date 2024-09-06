@@ -7,7 +7,7 @@
 ## @ norm <- normalization of outcomes - pre treatment
 
 
-estimation_mode <- function(sim, t0, bands, iter, warm, norm, method){
+estimation <- function(sim, t0, bands, iter, warm, norm, method){
   
   # Getting some quantities that are used later in the code.
   num_controls <- dim(sim)[2] - bands
@@ -80,6 +80,24 @@ estimation_mode <- function(sim, t0, bands, iter, warm, norm, method){
   ### 3 - Pooled ridge regression.
   
   if ("PR" %in% method){
+    
+    # THIS FUNCTION IS NOT CURRENTLY USED.
+    # If we use it again, we MUST check the following:
+    #
+    #  - for the choice of penalty:
+    # on line 84, you use tcv_ridge on sim, which includes post-intervention data.
+    # Shouldn’t we be finding the optimal lambda only in the pre-intervention period?
+    # Maybe the argument “train” achieves that. But still, in sim we have both treated
+    # and control units. Shouldn’t we be trying to fit the treated units only?
+    #  
+    #  - for the results:
+    #  the results of the pooled ridge (line 88) is a matrix of dimension (# bands) x
+    # (# controls + 1). I believe this includes the intercept and the coefficient for
+    # each control for EACH of the outcomes. Shouldn’t we have ONE coefficient for
+    # each control across all outcomes? I believe the problem might be with the
+    # x_matrix() function.
+        
+    
     l1 = seq(0.01,10,0.01)  # Vector of length 1000
     l = tcv_ridge(sim, x, l1, train)  # Returns 1000 x 2 matrix
     lam = as.numeric(subset(l, l[,2] == min(l[,2])))
@@ -219,7 +237,7 @@ estimation_mode <- function(sim, t0, bands, iter, warm, norm, method){
       
       
       fit <- rstan::stan(
-        file = "replication_april/bayesian_vr.stan",
+        file = "Methods/BVR",  # Bayesian vertical regression
         data = ss_data,
         cores = 3,
         iter = iter,
@@ -256,7 +274,7 @@ estimation_mode <- function(sim, t0, bands, iter, warm, norm, method){
       
       
       fit <- rstan::stan(
-        file = "replication_april/bayes_sc.stan",
+        file = "Methods/BSC.stan",  # Bayesian Synthetic control
         data = ss_data,
         cores = 3,
         iter = iter,
@@ -298,7 +316,7 @@ estimation_mode <- function(sim, t0, bands, iter, warm, norm, method){
     #   n_c=num_controls+1
     
     fit <- rstan::stan(
-      file = "replication_april/model_april2.stan",
+      file = "Methods/MGP.stan",  # SMAC.
       data = ss_data,
       cores = 3,
       iter = iter,
