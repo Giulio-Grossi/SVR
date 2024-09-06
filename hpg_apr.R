@@ -24,7 +24,8 @@ source("preset_function.R")
 #------- -GP- I did not check the following functions --------- #
 
 # Function for performing synthetic controls.
-source ("Functions/synth.R")
+source("Methods/SCM_function.R")
+source('Methods/sepSC_method.R')
 
 # Functions for performing the pooled ridge.
 source("Functions/tcv_ridge.R")
@@ -114,8 +115,8 @@ set.seed(index)
 # -GP- The standardization using preset() is moved inside estimation_mode and
 # calculations_mode().
 
-est = estimation_mode(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
-                      norm = T, method = method)
+est = estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
+                 norm = T, method = method)
 
 cal = calculations_mode(sim, est, norm=T)
 
