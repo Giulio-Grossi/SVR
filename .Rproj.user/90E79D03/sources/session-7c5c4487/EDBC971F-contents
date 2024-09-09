@@ -18,13 +18,10 @@ setwd('C:/Users/giuli/Documents/SMAC')
 # Sourcing in code from other files.
 source("sim_model_function.R")
 source("estimation_function.R")
-source("preset_function.R")
-
-
-#------- -GP- I did not check the following functions --------- #
+source("Methods/helper/preset_function.R")
 
 # Function for performing synthetic controls.
-source("Methods/SCM_function.R")
+source("Methods/helper/SCM_function.R")
 source('Methods/sepSC_method.R')
 
 # Function for performing separate vertical regression with ridge.
@@ -39,14 +36,17 @@ source('Methods/sepBSC_method.R')
 # Function for performing SMAC. 
 source('Methods/MGP_method.R')
 
-# Functions for performing the pooled ridge.
-source("Functions/tcv_ridge.R")
-source("Functions/x_matrix.R")
-source("Functions/ridge.R")
+#------- -GP- I did not check the following functions --------- #
+# ------- Functions for fused and pooled ridge ------- # 
 
-# Functions for performing fused ridge.
-source("Functions/fused.R")
-source("Functions/tcv_fused.R")
+# # Functions for performing the pooled ridge.
+# source("Methods/ignore/tcv_ridge.R")
+# source("Methods/ignore/x_matrix.R")
+# source("Methods/ignore/ridge.R")
+# 
+# # Functions for performing fused ridge.
+# source("Methods/ignore/fused.R")
+# source("Methods/ignore/tcv_fused.R")
 
 # ------- End of functions I did not check. ----------- #
 
