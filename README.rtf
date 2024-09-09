@@ -1,1 +1,41 @@
+############## - README SMAC - ################
+
+At this level we should find only the first level functions. 
+Thus we should have the master file ("hpg_apr.R") and the functions called at this level 
+
+- sim_model_function.R is the function that creates simulations, beta and true outcomes
+- estimation.R is the function we use to estimate the coefficients of SMAC and other methods
+- calculation.R is the function we use to retrieve the predicted counterfactual outcomes for the treated units
+
+For the postestimation we have 
+
+- wrap_all.R which stores into a list all the simulations for the 200 replications and the predicted outcomes
+- cov_freq.R which calculates the frequentist coverage for the synthetic control and the separate ridge regression
+- cov_bayes.R which calculates the coverage for Bayesian Vertical Regression, Bayes Synthetic control and SMAC
+
+### - FOLDERS - ###
+09/09
+There are two folder: 
+- Methods: in this folder are stores in separate files all the methods we are using and the stan files to perform them
+  - Methods/ignore: Old methods, to be used in the future, or never
+  - Methods/deprecated: Old files, stores here just in case, no active in any method
+  - Methods/helper: support functions, currently used 
+
+- Post HPG: in this folder there are the files to be used AFTER wrap_all.R, cov_bayes.R, cov_freq.R
+
+
+This is the workflow 
+
+
+-- to be run in parallel on HPG
+
+1- Master file: hpg_apr.R
+2- Simulations: sim_model_function.R
+3- Estimations: estimation_function.R
+4- Predicted counterfactual outcomes: calculations.R
+-- end of parallel computing
+-- ON HPG
+5- Wrap_all.R // cov_freq.R // cov_bayes.R : same level of workflow, can be run simoultaneously, to be done on HPG
+-- ON LOCAL MACHINE
+
 
