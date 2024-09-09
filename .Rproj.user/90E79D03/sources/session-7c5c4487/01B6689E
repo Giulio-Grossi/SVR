@@ -1,0 +1,26 @@
+{
+    "id": "01B6689E",
+    "path": "~/SMAC/estimation_function.R",
+    "project_path": "estimation_function.R",
+    "type": "r_source",
+    "hash": "2155507619",
+    "contents": "",
+    "dirty": false,
+    "created": 1725874176798.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "221,7",
+        "scrollLine": "216"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1725879244,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1725879244732,
+    "read_only": false,
+    "read_only_alternatives": []
+}
