@@ -223,9 +223,9 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
     print("BSC estimates done")
   }
   
-  if("MGP" %in% method) {
-    out$MGP <- MGP(ym.pre, x.pre, x, treated_radius)
-    print("MGP estimates done")
+  if("SMAC" %in% method) {
+    out$SMAC <- SMAC(ym.pre, x.pre, x, treated_radius)
+    print("SMAC estimates done")
   }
   
   

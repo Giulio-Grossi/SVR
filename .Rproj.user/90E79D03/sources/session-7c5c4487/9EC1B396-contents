@@ -1,0 +1,20 @@
+#' Calculating separate synthetic control for each band.
+#' 
+#' @param est is the list of estimation results
+#' @param x Matrix Time_periods x (# controls) for 
+#' the control units.
+#' 
+#' return the predicted values for the synthetic control estimation 
+cal_sepSC <- function(est, x, bands) {
+  
+  ## setup
+  c.sep.scm=est[["SC"]]
+  time_periods=nrow(x)
+  bands=nrow(c.sep.scm)
+  ## calculation  
+  out = matrix(nrow = time_periods, ncol = bands)
+  for (i in 1:bands) {
+    out[, i] = x %*% c.sep.scm[,i]
+  }
+  return(out)
+}

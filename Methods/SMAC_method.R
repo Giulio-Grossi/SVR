@@ -11,7 +11,7 @@
 #' 
 #' Depends on the MGP.stan file, and rstan library
 #' 
-MGP <- function(ym.pre, x.pre, x, treated_radius) {
+SMAC <- function(ym.pre, x.pre, x, treated_radius) {
   
   # arguments
   bands <- ncol(ym.pre)
@@ -37,7 +37,7 @@ MGP <- function(ym.pre, x.pre, x, treated_radius) {
   #   n_c=num_controls+1
   
   parameters <- rstan::stan(
-    file = "Methods/MGP.stan",  # SMAC.
+    file = "Methods/SMAC.stan",  # SMAC.
     data = ss_data,
     cores = 3,
     iter = iter,
