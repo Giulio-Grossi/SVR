@@ -3,15 +3,19 @@
 At this level we should find only the first level functions. 
 Thus we should have the master file ("hpg_apr.R") and the functions called at this level 
 
+in the Functions folder we have
 - sim_model_function.R is the function that creates simulations, beta and true outcomes
-- estimation.R is the function we use to estimate the coefficients of SMAC and other methods
-- calculation.R is the function we use to retrieve the predicted counterfactual outcomes for the treated units
+- estimation_function.R is the function we use to estimate the coefficients of SMAC and other methods
+- calculation_function.R is the function we use to retrieve the predicted counterfactual outcomes for the treated units
+- point_estimate_function.R is the function that calculates the MSE and bias from predictions for the treated units
+- ci_function is the function that calculates the confidence intervals from predictions for the treated units
+- ci_function is the function that calculates the coverage for the treated units
+
 
 For the postestimation we have 
 
-- wrap_all.R which stores into a list all the simulations for the 200 replications and the predicted outcomes
-- cov_freq.R which calculates the frequentist coverage for the synthetic control and the separate ridge regression
-- cov_bayes.R which calculates the coverage for Bayesian Vertical Regression, Bayes Synthetic control and SMAC
+- wrap.R which stores into a list all the simulations for the 200 replications and the predicted outcomes, 
+  MSE and bias, confidence intervals and coverage 
 
 ### - FOLDERS - ###
 09/09
@@ -33,9 +37,12 @@ This is the workflow
 2- Simulations: sim_model_function.R
 3- Estimations: estimation_function.R
 4- Predicted counterfactual outcomes: calculations.R
+5- Calculations of MSE and bias: point_estimate_function.R
+6- Estimation of confidence intervals: ci_function.R
+7- Calculation of the coverage: coverage_function.R
 -- end of parallel computing
 -- ON HPG
-5- Wrap_all.R // cov_freq.R // cov_bayes.R : same level of workflow, can be run simoultaneously, to be done on HPG
+8- Wrap.R wrap all the estimation results in a single file to be used in local
 -- ON LOCAL MACHINE
 
 
