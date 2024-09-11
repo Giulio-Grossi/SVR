@@ -1,0 +1,61 @@
+################################################################################
+###################   wrap file to store the results from 200 iter into one ####
+s1=0.01
+
+for (ss in s1){
+  for (tt in c(10, 20, 40)){
+   for (ee in c(1,2,3)){
+
+    simulations =list()
+    calculations=list()
+    point_estimates = list()
+    confidence_intervals = list()
+    coverage = list()
+    active=as.vector(list.files(paste0("Output/apr_sims/Results","/ss",ss,
+                                       "/tt", tt, "/ee", ee)))
+    for(hh in 1:length(active)){
+     tryCatch({
+	   
+	    ii=active[hh]
+      load(paste0('Output/apr_sims/Results',"/ss",ss, "/tt", tt,
+                  "/ee", ee, "/", ii))
+      hh=which(active==ii)
+      simulations[[hh]]<-res[[1]]
+      calculations[[hh]]<-res[[3]]
+      point_estimates[[hh]]<-res[[5]]
+      confidence_intervals[[hh]]<-res[[6]]
+      coverage <- res[[7]]
+     }, error = function(e) {
+    # Gestione dell'errore
+    print(paste("Errore durante l'iterazione", i, ": ", e$message))
+  })
+    }
+    ## - save simulations
+    save_file=paste0("Output/apr_sims/sim.", "ss",ss, "tt", tt,"ee",
+                     ee, ".RData")
+    print(save_file)
+    save(simulations, file =save_file)
+    
+    ##- save calculations
+    save_file=paste0("Output/apr_sims/cal.", "ss",ss, "tt", tt, "ee",
+                     ee,  ".RData")
+    save(calculations, file =save_file)
+    
+    ## save point estimates
+    save_file=paste0("Output/apr_sims/point.", "ss",ss, "tt", tt, "ee",
+                     ee,  ".RData")
+    save(point_estimates, file =save_file)
+    
+    ## save confidence intervals
+    save_file=paste0("Output/apr_sims/ci.", "ss",ss, "tt", tt, "ee",
+                     ee,  ".RData")
+    save(confidence_intervals, file =save_file)
+    
+    ## save confidence intervals
+    save_file=paste0("Output/apr_sims/cov.", "ss",ss, "tt", tt, "ee",
+                     ee,  ".RData")
+    save(coverage, file =save_file)
+
+  }
+}
+}
