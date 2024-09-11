@@ -1,0 +1,74 @@
+
+
+
+
+
+wrapper<-function(input, methods){
+  rr <- list()
+  for(ii in 1:length(methods)){
+    rr[[ii]]=list()
+  }
+  names(rr)=methods
+  for(i in c(1:length(input))){
+    tryCatch({
+      
+      rr[[methods[i]]]<-
+      
+
+      
+      gp=list()
+      sc=list()
+      sr=list()
+      vr=list()
+      br=list()
+      bsc=list()
+      
+      
+      for (ii in 1:length(sim_l)){
+        #aa=preset(sim[[ii]], tt0[i])
+        aa=sim[[ii]]
+        cc=cal[[ii]]
+        
+
+        
+        
+        gp[[ii]]=(aa[,1:bands]-cc[["MGP"]])^exp
+        sc[[ii]]=(aa[,1:bands]-cc[["SC"]])^exp
+        sr[[ii]]=(aa[,1:bands]-cc[["SR"]])^exp
+        vr[[ii]]=(aa[,1:bands]-cc[["PR"]])^exp
+        br[[ii]]=(aa[,1:bands]-cc[["BVR"]])^exp
+        bsc[[ii]]=(aa[,1:bands]-cc[["BSC"]])^exp
+        
+      }
+      
+      
+      =apply(simplify2array(gp[-c(76:80)]), 1:2, mean, na.rm=T)
+      sc_fin=apply(simplify2array(sc[-c(76:80)]), 1:2, mean, na.rm=T)
+      sr_fin=apply(simplify2array(sr[-c(76:80)]), 1:2, mean, na.rm=T)
+      vr_fin=apply(simplify2array((vr[-c(76:80)])), 1:2, mean, na.rm=T)
+      br_fin=apply(simplify2array((br[-c(76:80)])), 1:2, mean, na.rm=T)
+      bsc_fin=apply(simplify2array((bsc[-c(76:80)])), 1:2, mean, na.rm=T)
+      
+      res_gp[[i]]=gp_fin
+      res_sc[[i]]=sc_fin
+      res_sr[[i]]=sr_fin
+      res_vr[[i]]=vr_fin
+      res_br[[i]]=br_fin
+      res_bsc[[i]]=bsc_fin
+      
+    }, error = function(e) {
+      # Gestione dell'errore
+      print(paste("Errore durante l'iterazione", i, ": ", e$message))
+    })
+  }
+  
+  res=list()
+  
+  res[[1]]=res_gp
+  res[[2]]=res_sc
+  res[[3]]=res_sr
+  res[[4]]=res_vr
+  res[[5]]=res_br
+  res[[6]]=res_bsc
+  return(res)
+}

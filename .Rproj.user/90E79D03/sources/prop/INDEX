@@ -22,6 +22,8 @@
 ~%2FSMAC%2FMethods%2FsepSR_calculation.R="0E72D79C"
 ~%2FSMAC%2FMethods%2FsepSR_method.R="03BB05B4"
 ~%2FSMAC%2FPostestimation%2Fhelper%2Fbinder.R="CF931ABB"
+~%2FSMAC%2FPostestimation%2Fhelper%2Fpostestimation_function.R="4CA3EF19"
+~%2FSMAC%2FPostestimation%2Fhelper%2Fwrapper.R="19FD3935"
 ~%2FSMAC%2FPostestimation%2Fmaster_cluster.R="323BF0ED"
 ~%2FSMAC%2FPostestimation%2Fpostestimation_function.R="34973A8E"
 ~%2FSMAC%2Fcov_bayes.R="9F4F5E37"
