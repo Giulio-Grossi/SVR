@@ -24,6 +24,7 @@ source("Functions/coverage_function.R")
 source("Methods/helper/preset_function.R")
 source("Methods/helper/ci_shen.R")
 source("Methods/helper/ci_bayes.R")
+source("Methods/helper/coverage.R")
 
 # Function for performing synthetic controls.
 source("Methods/helper/SCM_function.R")
@@ -148,6 +149,7 @@ res[[3]]<-cal
 res[[4]]<- beta_true
 res[[5]]<- point
 res[[6]]<- ci 
+res[[7]]<- coverage
 
 
 

@@ -20,9 +20,11 @@ source("Functions/estimation_function.R")
 source("Functions/calculation_function.R")
 source("Functions/point_estimate_function.R")
 source("Functions/ci_function.R")
+source("Functions/coverage_function.R")
 source("Methods/helper/preset_function.R")
 source("Methods/helper/ci_shen.R")
 source("Methods/helper/ci_bayes.R")
+source("Methods/helper/coverage.R")
 
 # Function for performing synthetic controls.
 source("Methods/helper/SCM_function.R")
@@ -135,7 +137,9 @@ est = estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
 
 cal = calculation(sim=sim, est=est, norm=T)
 point = point_est(sim,cal) ## it calculates bias and MSE
-ci= confidence_interval()
+ci= ci_function(sim=sim, est=est, cal=cal, norm = T)
+coverage<-coverage_function(sim, ci)
+
 
 
 res=list()
@@ -144,6 +148,10 @@ res[[2]]=est
 res[[3]]<-cal
 res[[4]]<- beta_true
 res[[5]]<- point
+res[[6]]<- ci 
+res[[7]]<- coverage
+
+
 
 out_path <- paste0('Output/apr_sims/Results/ss', sp_range, '/tt', tt_periods,
                    '/ee', errors_sp)
