@@ -1,27 +1,26 @@
 {
-    "id": "F0203D04",
-    "path": "~/SMAC/Methods/sepBSC_method.R",
-    "project_path": "Methods/sepBSC_method.R",
+    "id": "CE8EB9A0",
+    "path": "~/SMAC/Functions/calculation_function.R",
+    "project_path": "Functions/calculation_function.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1725874813666.0,
+    "created": 1725989396809.0,
     "source_on_save": false,
     "relative_order": 4,
     "properties": {
-        "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "1,0",
-        "scrollLine": "0"
+        "cursorPosition": "10,0",
+        "scrollLine": "21"
     },
     "folds": "",
-    "lastKnownWriteTime": 1725876885,
+    "lastKnownWriteTime": 1725955035,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1725876885595,
+    "last_content_update": 1725955035,
     "read_only": false,
     "read_only_alternatives": []
 }

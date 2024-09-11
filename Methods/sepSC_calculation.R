@@ -10,7 +10,7 @@ cal_sepSC <- function(est, x) {
   ## setup
   c.sep.scm=est[["SC"]]
   time_periods=nrow(x)
-  bands=nrow(c.sep.scm)
+  bands=ncol(c.sep.scm)
   ## calculation  
   out = matrix(nrow = time_periods, ncol = bands)
   for (i in 1:bands) {

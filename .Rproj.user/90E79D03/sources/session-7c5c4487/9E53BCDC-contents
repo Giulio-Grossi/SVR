@@ -10,7 +10,7 @@ cal_sepSR <- function(est, x) {
   ## setup
   c.sep.rid=est[["SR"]]
   time_periods=nrow(x)
-  bands=nrow(c.sep.rid)-1 ## nrow(c.sep.rid) = #treated + constant
+  bands=ncol(c.sep.rid) ## 
   ## calculation  
   out = matrix(nrow = time_periods, ncol = bands)
   for (i in 1:bands) {

@@ -1,27 +1,27 @@
 {
-    "id": "9E53BCDC",
-    "path": "~/SMAC/Methods/sepSR_calculation.R",
-    "project_path": "Methods/sepSR_calculation.R",
+    "id": "E2E9E8CE",
+    "path": "~/SMAC/Functions/ci_function.R",
+    "project_path": "Functions/ci_function.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1725954528295.0,
+    "created": 1725989399683.0,
     "source_on_save": false,
-    "relative_order": 8,
+    "relative_order": 5,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "20,0",
-        "scrollLine": "7"
+        "cursorPosition": "88,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1725958044,
+    "lastKnownWriteTime": 1725989258,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1725958044845,
+    "last_content_update": 1725989258,
     "read_only": false,
     "read_only_alternatives": []
 }

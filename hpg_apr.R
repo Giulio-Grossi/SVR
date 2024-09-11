@@ -18,7 +18,11 @@ setwd('C:/Users/giuli/Documents/SMAC')
 source("Functions/sim_model_function.R")
 source("Functions/estimation_function.R")
 source("Functions/calculation_function.R")
+source("Functions/point_estimate_function.R")
+source("Functions/ci_function.R")
 source("Methods/helper/preset_function.R")
+source("Methods/helper/ci_shen.R")
+source("Methods/helper/ci_bayes.R")
 
 # Function for performing synthetic controls.
 source("Methods/helper/SCM_function.R")
@@ -68,7 +72,7 @@ num_controls=10
 t0=tt_periods
 time_periods=t0 + 20
 time_periods_controls <- 80  # -GP- Do not change this with t0.
-bands <-10
+bands <-3
 ## sampling pars
 iter=6000
 warm=2000
@@ -123,16 +127,23 @@ set.seed(index)
 # -GP- The standardization using preset() is moved inside estimation_mode and
 # calculations_mode().
 
+iter=10
+warm=5
+
 est = estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
                  norm = T, method = method)
 
-cal = calculation(sim, est, norm=T)
+cal = calculation(sim=sim, est=est, norm=T)
+point = point_est(sim,cal) ## it calculates bias and MSE
+ci= confidence_interval()
+
 
 res=list()
 res[[1]]=sim
 res[[2]]=est
 res[[3]]<-cal
 res[[4]]<- beta_true
+res[[5]]<- point
 
 out_path <- paste0('Output/apr_sims/Results/ss', sp_range, '/tt', tt_periods,
                    '/ee', errors_sp)

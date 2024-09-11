@@ -1,26 +1,24 @@
 {
-    "id": "E77007ED",
-    "path": "~/SMAC/Functions/calculation_function.R",
-    "project_path": "Functions/calculation_function.R",
+    "id": "44CE446B",
+    "path": "~/SMAC/postestimation.R",
+    "project_path": "postestimation.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1725953384617.0,
+    "created": 1725985880999.0,
     "source_on_save": false,
     "relative_order": 5,
     "properties": {
         "source_window_id": "",
-        "Source": "Source",
-        "cursorPosition": "42,2",
-        "scrollLine": "31"
+        "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1725955035,
+    "lastKnownWriteTime": 1725890717,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1725955035948,
+    "last_content_update": 1725890717,
     "read_only": false,
     "read_only_alternatives": []
 }
