@@ -20,6 +20,7 @@ postestimation <- function(dir1, dir2, rho, exp){
 # ss=0.0001
 oo=binder(dir,dir,  rho)
 sim_l=oo[[1]]; cal_l=oo[[2]]; cov_l=oo[[3]]
+bias_l=oo[[4]]; mse_l=oo[[5]]
 res=wrapper(sim_l, cal_l, cov_l, exp)
 m1=tabler(res, tt0, pt1)
 m2=tabler(res, tt0, pt2)
