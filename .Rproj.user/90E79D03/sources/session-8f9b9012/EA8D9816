@@ -1,11 +1,11 @@
 {
     "id": "EA8D9816",
-    "path": null,
-    "project_path": null,
+    "path": "~/SMAC/Methods/helper/wrapper.R",
+    "project_path": "Methods/helper/wrapper.R",
     "type": "r_source",
-    "hash": "3663476824",
+    "hash": "1646133102",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1726067118672.0,
     "source_on_save": false,
     "relative_order": 7,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "12,14",
-        "scrollLine": "0"
+        "cursorPosition": "59,28",
+        "scrollLine": "33"
     },
     "folds": "",
-    "lastKnownWriteTime": 2168027786008,
-    "encoding": "",
+    "lastKnownWriteTime": 1726159267,
+    "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1726067820724,
+    "last_content_update": 1726159267071,
     "read_only": false,
     "read_only_alternatives": []
 }

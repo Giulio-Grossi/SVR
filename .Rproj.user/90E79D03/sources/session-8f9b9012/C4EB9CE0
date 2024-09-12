@@ -1,27 +1,27 @@
 {
-    "id": "975B228A",
-    "path": "~/SMAC/Functions/point_estimate_function.R",
-    "project_path": "Functions/point_estimate_function.R",
+    "id": "C4EB9CE0",
+    "path": "~/SMAC/master_postestimation.R",
+    "project_path": "master_postestimation.R",
     "type": "r_source",
-    "hash": "494667447",
+    "hash": "3580083369",
     "contents": "",
     "dirty": false,
-    "created": 1726065802809.0,
+    "created": 1726154701382.0,
     "source_on_save": false,
-    "relative_order": 7,
+    "relative_order": 5,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "60,0",
-        "scrollLine": "42"
+        "cursorPosition": "6,34",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1725982296,
+    "lastKnownWriteTime": 1726154729,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1725982296,
+    "last_content_update": 1726154729270,
     "read_only": false,
     "read_only_alternatives": []
 }

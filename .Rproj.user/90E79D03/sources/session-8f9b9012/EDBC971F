@@ -1,0 +1,26 @@
+{
+    "id": "EDBC971F",
+    "path": "~/SMAC/hpg_apr.R",
+    "project_path": "hpg_apr.R",
+    "type": "r_source",
+    "hash": "2119885874",
+    "contents": "",
+    "dirty": false,
+    "created": 1725869835220.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "29,30",
+        "scrollLine": "22"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1726159271,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1726159271290,
+    "read_only": false,
+    "read_only_alternatives": []
+}
