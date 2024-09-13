@@ -116,14 +116,14 @@ print(treated_radius)
 seed_b <- seed_t <- seed_e <- index
 
 sim <- sim_model(seed_b = seed_b, seed_t = seed_t, seed_e = seed_e,
-              time_periods = time_periods, 
-              time_periods_controls = time_periods_controls,
-              bands = bands, num_controls = num_controls,
-              sp_var = sp_var, sp_range = sp_range, bi_var = bi_var, 
-              tt_var = tt_var,
-              tt_range = tt_range, ti_var = ti_var, sp_nugget = sp_nugget,
-              tt_nugget = tt_nugget,
-              e_weight = e_weight, share_error = share_error)
+                 time_periods = time_periods, 
+                 time_periods_controls = time_periods_controls,
+                 bands = bands, num_controls = num_controls,
+                 sp_var = sp_var, sp_range = sp_range, bi_var = bi_var, 
+                 tt_var = tt_var,
+                 tt_range = tt_range, ti_var = ti_var, sp_nugget = sp_nugget,
+                 tt_nugget = tt_nugget,
+                 e_weight = e_weight, share_error = share_error)
 
 beta_true <- sim$beta
 sim <- sim$sim  # The potential outcomes under control.
@@ -138,7 +138,7 @@ iter <- 10
 warm <- 5
 
 est <- estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
-                 norm = TRUE, method = method)
+                  norm = TRUE, method = method)
 
 
 # ---------------- PART D: Getting predictions ---------------- #
