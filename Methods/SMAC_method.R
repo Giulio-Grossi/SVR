@@ -26,9 +26,9 @@ SMAC <- function(ym.pre, x.pre, x, treated_radius) {
     xnn = x,
     h = treated_radius,
     tt = time_periods,
-    t0=t0,
-    n_t=bands, 
-    n_c=num_controls
+    t0 = t0,
+    n_t = bands, 
+    n_c = num_controls
   )
   
   # With an intercept it would be:

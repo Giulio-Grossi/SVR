@@ -138,7 +138,7 @@ iter <- 10
 warm <- 5
 
 est <- estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
-                 norm = T, method = method)
+                 norm = TRUE, method = method)
 
 
 # ---------------- PART D: Getting predictions ---------------- #
@@ -152,16 +152,8 @@ coverage <- coverage(sim, ci)
 
 # ---------------- PART E: Saving results ---------------- #
 
-res=list()
-res[[1]] <- sim
-res[[2]] <- est
-res[[3]] <- cal
-res[[4]] <- beta_true
-res[[5]] <- point
-res[[6]] <- ci 
-res[[7]] <- coverage
-
-
+res <- list(sim = sim, est = est, cal = cal, beta_true = beta_true,
+            point = point, ci = ci, coverage = coverage)
 
 out_path <- paste0('Output/apr_sims/Results/ss', sp_range, '/tt', tt_periods,
                    '/ee', errors_sp)

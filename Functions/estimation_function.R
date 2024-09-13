@@ -23,19 +23,19 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   # unit 2, etc. So as.vector loops over times and then units.
   
   # Getting the treated unit data:
-  yv = as.vector(sim[, 1:bands])  # As a vector over all time periods
+  yv = as.vector(sim[, 1 : bands])  # As a vector over all time periods
   yv.pre = as.vector(sim[1 : t0, 1 : bands])  # As a vector in pre-intervention
   ym = sim[, 1 : bands]  # As a matrix over all time periods.
-  ym.pre = sim[1:t0, 1:bands] # As a matrix in pre-intervention.
+  ym.pre = sim[1 : t0, 1 : bands] # As a matrix in pre-intervention.
   
   # Getting the control unit data.
   x = sim[, (bands + 1) : (num_controls + bands)]  # Matrix, all time periods
   x.pre = sim[1 : t0, ((bands) + 1) : (num_controls + bands)]  # Matrix, pre-intervention
   
   # Getting the training data, will be used in ridge only.
-  train = round(t0 - t0/5)
-  y.train = as.vector(sim[1:train, 1:bands])
-  x.train = sim[1:train, ((bands) + 1):(num_controls + bands)]
+  train = round(t0 - t0 / 5)
+  y.train = as.vector(sim[1 : train, 1 : bands])
+  x.train = sim[1:train, ((bands) + 1) : (num_controls + bands)]
   
   
   ### storing results
@@ -46,50 +46,54 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   
   if ("SC" %in% method){
     out$SC = sepSC(ym.pre = ym.pre, x.pre = x.pre)
+    # The output is a matrix of dimension (num_controls x bands) with
+    # estimated coefficients.
     print("SC estimates done")
   }
   
   ### 2- Separate ridge estimation
   
   if ("SR" %in% method){
-    out$SR = sepSR(ym.pre = ym.pre, x.pre = x.pre)  # -GP- Be careful! It includes intercepts!
+    out$SR = sepSR(ym.pre = ym.pre, x.pre = x.pre)
+    # The output is a matrix of dimension ((num_controls + 1) x bands) with
+    # estimated coefficients. The first row is the intercept.
     print("SR estimates done")
   }
   
-  if ("OLS" %in% method){ # Pooled OLS
-    
-    # -GP- When using
-    #     tx = x_matrix(x.pre)
-    # tx ends up being too large with way too many 0s. This is not the matrix
-    # we want to use as our design matrix for pooled OLS.
-    #
-    # We want to have the matrix of the controls repeated #bands times on top
-    # of each other. So:
-    # tx <- x.pre 
-    # for (i in 2 : bands) {
-    #   tx <- rbind(tx, x.pre)  # this should be (#bands * T0) x (#controls)
-    # }
+  if ("OLS" %in% method){ # Separate OLS for each treated unit.
     
     ## - GG - we can estimate the OLS coefficient also via multivariate
     # regression in a simultaneous estimate without passing through 
     # the x_matrix(x) argument. 
     
     lmod <- lm(ym.pre ~ x.pre)
-    out$pooledOLS <- lmod$coef
+    out$OLS <- lmod$coef
+    # The output is a matrix of dimension ((num_controls + 1) x bands) with
+    # estimated coefficients. The first row is the intercept.
     print("OLS estimates done")
   }
   
+  
   if ("BVR" %in% method) {
-    
-  out$BVR <- sepBVR(ym.pre = ym.pre, x.pre = x.pre, x=x)
-  print("BVR estimates done")
+    out$BVR <- sepBVR(ym.pre = ym.pre, x.pre = x.pre, x = x)
+    # The output is a list, where each element of the list corresponds to a
+    # treated unit. Then each element is a list of itself from what was
+    # extracted from the Stan fit, including a vector of residual variances
+    # (sigma_sq) and standard deviations (sigma), a matrix of coefficients
+    # where the rows are iterations and the columns correspond to intercept
+    # and controls (gp1), and the predicted values for the treated unit where
+    # rows are iterations and columns are time periods (y_new).
+    print("BVR estimates done")
   }
   
   
   if ("BSC" %in% method){
-    out$BSC <- sepBSC(ym.pre = ym.pre, x.pre = x.pre, x=x)
+    out$BSC <- sepBSC(ym.pre = ym.pre, x.pre = x.pre, x = x)
+    # The exact same output as sepBVR, except the coefficient matrix does not
+    # include intercepts.
     print("BSC estimates done")
   }
+  
   
   if("SMAC" %in% method) {
     out$SMAC <- SMAC(ym.pre, x.pre, x, treated_radius)

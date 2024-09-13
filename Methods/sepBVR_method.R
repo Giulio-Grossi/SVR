@@ -14,8 +14,6 @@ sepBVR <- function(ym.pre, x.pre, x) {
   # arguments
   bands <- ncol(ym.pre)
   num_controls <- ncol(x.pre)
-  
-  
   parameters=list()
   
   for (i in 1:bands){
