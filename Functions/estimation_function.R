@@ -98,6 +98,10 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   if("SMAC" %in% method) {
     out$SMAC <- SMAC(ym.pre = ym.pre, x.pre = x.pre, x = x,
                      treated_radius = treated_radius)
+    # The output of the SMAC stan fit including coefficients, spatial
+    # parameters for the errors and the coefficients, weight of spatial VS
+    # iid error, covariance matrix, and predictions for the treated units.
+    # The predictions are in ynn.
     print("SMAC estimates done")
   }
   
