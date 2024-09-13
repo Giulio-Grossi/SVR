@@ -91,8 +91,8 @@ rho_error <- .2
 # ----- Outcome model errors.
 
 if (errors_sp == 1) {
-  e_weight <- 0  # Proportion of error that is spatial
-  share_error <- 0.4  # Noise-signal ratio (sd for error term as % of signal)
+  e_weight <- 0  # Proportion of error's variance that is spatial
+  share_error <- 0.4  # Noise-signal ratio in terms of variances (error sd as % of signal)
 } else if (errors_sp == 2) {
   e_weight <- .5
   share_error <- 0.4

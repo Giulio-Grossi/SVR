@@ -100,10 +100,10 @@ sim_model<-function(seed_b, seed_t, seed_e,
   set.seed(seed_e) # -GG- : set the seed
   errors_1 <- matrix(NA, nrow = time_periods, ncol = bands)
   for (i in 1 : time_periods) {
-    Sigma <- (exp(- D_xloc ^ 2 / (2*(rho_error ^ 2)))) + sp_nugget * diag(1, length(treated_radius))
+    Sigma <- (exp(- D_xloc ^ 2 / (2*(rho_error ^ 2)))) + sp_nugget * diag(1, bands)
     errors_1[i,] <- t(chol(Sigma)) %*% as.vector(rnorm(bands, 0, error)) # construction of beta GP
   }
-  errors_0 <- matrix(0, nrow=time_periods, ncol <- num_controls)
+  errors_0 <- matrix(0, nrow = time_periods, ncol = num_controls)
   # errors includes the spatial error term for the treated units and 0s for the
   # control units.
   errors <- cbind(errors_1, errors_0)
@@ -117,16 +117,17 @@ sim_model<-function(seed_b, seed_t, seed_e,
   wn <- cbind(wn, errors_0)
   colnames(wn) <- colnames(errors)
   
-  ee =  e_weight * errors + (1 - e_weight) * wn
-  #ee=errors
-  #corrplot::corrplot(cor(ee))
-  sim=true_sim + ee
+  ee <- sqrt(e_weight) * errors + sqrt(1 - e_weight) * wn
+  #corrplot::corrplot(cor(errors))
+  
+  sim <- true_sim + ee
   #corrplot::corrplot(cor(sim))  # check visual results
-  out=list()
-  out[[1]]=sim  # The potential outcomes (under control) for treated and control units.
-  out[[2]]=beta  # The true coefficients of the controls across radii.
-  out[[3]]=y  # The observed control time series. (Also part of sim.)
-  out[[4]]=true_sim  # The underlying signal of the time series, w/o error added to treated units (unobservable).
+  
+  out <- list()
+  out[[1]] <- sim  # The potential outcomes (under control) for treated and control units.
+  out[[2]] <- beta  # The true coefficients of the controls across radii.
+  out[[3]] <- y  # The observed control time series. (Also part of sim.)
+  out[[4]] <- true_sim  # The underlying signal of the time series, w/o error added to treated units (unobservable).
   names(out) <- c('sim', 'beta', 'y', 'true_sim')
   return(out)
 }
