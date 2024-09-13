@@ -16,8 +16,8 @@ SMAC <- function(ym.pre, x.pre, x, treated_radius) {
   # arguments
   bands <- ncol(ym.pre)
   num_controls <- ncol(x.pre)
-  time_periods=nrow(x)
-  t0=nrow(x.pre)
+  time_periods <- nrow(x)
+  t0 <- nrow(x.pre)
 
   # Without an intercept:
   ss_data = list(
@@ -36,7 +36,7 @@ SMAC <- function(ym.pre, x.pre, x, treated_radius) {
   #   xnn = cbind(1, x),
   #   n_c=num_controls+1
   
-  parameters <- rstan::stan(
+  fit <- rstan::stan(
     file = "Methods/SMAC.stan",  # SMAC.
     data = ss_data,
     cores = 3,
@@ -50,6 +50,8 @@ SMAC <- function(ym.pre, x.pre, x, treated_radius) {
       adapt_delta = 0.99
     )
   )
+  
+  parameters <- rstan::extract(fit)
   
   return(parameters)
   

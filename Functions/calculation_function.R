@@ -68,7 +68,7 @@ calculation <- function(sim, est, norm) {
   
   ### 6.0 SMAC
   if ("SMAC" %in% names(est)){
-    posterior=rstan::extract(est[["SMAC"]])
+    posterior=est[["SMAC"]]
     store=vector()
     for(i in 1:bands){
       loc=apply(posterior$ynn[,,i],2,median)
