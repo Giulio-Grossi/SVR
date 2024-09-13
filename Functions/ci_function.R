@@ -9,7 +9,7 @@
 ## Preparing different matrix config for estimation 
 #  pre/post treatment
 
-ci_function<-function(sim, est, cal, norm){
+ci <- function(sim, est, cal, norm){
   
   # Standardizing the data using the preset function.
   # if (norm == T) {

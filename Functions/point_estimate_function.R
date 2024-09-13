@@ -5,7 +5,7 @@
 ## @ cal <- results from calculation function
 
 
-point_est <- function(sim, cal) {
+point_estimate <- function(sim, cal) {
   bias=list();mse=list()
   ### 1.0 SEPARATED SCM
   if ("SC" %in% names(cal)){

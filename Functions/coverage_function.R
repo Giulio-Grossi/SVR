@@ -8,7 +8,7 @@
 ## Preparing different matrix config for estimation 
 #  pre/post treatment
 
-coverage_function<-function(sim, ci){
+coverage <- function(sim, ci){
   
   bands=ncol(ci$SC$upper_bound)
   time_periods=nrow(ci$SC$upper_bound)
