@@ -1,44 +1,34 @@
+#' ############################################################################
+#' Function to generate tabled results over the post_treatment period for 
+#' bias, MSE and coverage. 
+#' @param res is the input list of structure obj$scenario$method 
+#' @param tt0 is the pre_treatment period length
+#' @param post_treatment is the vector of post_treatment period, as we consider
+#' three different scenarios 
+#' #############################################################################
+
 
 tabler<-function(res, tt0, post_treatment){
 tab=vector()
 nn=c("tt10 - IID", "tt10 - 40%", "tt10 - 70%",
      "tt20 - IID", "tt20 - 40%", "tt20 - 70%",
      "tt40 - IID", "tt40 - 40%", "tt40 - 70%"  )
-res_gp=res[[1]]
-res_sc=res[[2]]
-res_sr=res[[3]]
-res_vr=res[[4]]
-res_br=res[[5]]
-res_bsc=res[[6]]
 
-
+tavola=vector()
 for (ii in 1:length(input$SMAC)){
   t0=tt0[ii]
   time_periods=tt0[ii] + post_treatment[ii]
+  loc <- res[[ii]]
+  tab=vector()
+  for (kk in 1:length(loc)){
+     tab<-c(tab, mean(apply(loc[[kk]], 1, mean)[(t0+1):time_periods], na.rm=T))
+  }
+  colnames(tab)=colnames(loc)
   
-  for 
-  
-  tab <- 
-  
-  
-  
-  
+tavola=rbind(tavola, tab)
+}
+rownames(tavola) = nn
+out(tavola)
 }
 
 
-
-for(ii in 1:9){
-  t0=tt0[ii]
-  time_periods=tt0[ii] + post_treatment[ii]
-  mse_tab=rbind(mse_tab, c(mean(apply(res_gp[[ii]], 1, mean)[(t0+1):time_periods], na.rm=T),
-                           mean(apply(res_sc[[ii]], 1, mean)[(t0+1):time_periods], na.rm=T),
-                           mean(apply(res_sr[[ii]], 1, mean)[(t0+1):time_periods], na.rm=T),
-                           mean(apply(res_br[[ii]], 1, mean)[(t0+1):time_periods], na.rm=T), 
-                           mean(apply(res_bsc[[ii]], 1, mean)[(t0+1):time_periods], na.rm=T)))
-}
-
-
-colnames(mse_tab)=c("SMaC", "SCM", "Ridge", "BayVR", "BaySC")
-rownames(mse_tab)=nn
-return(mse_tab)
-}
