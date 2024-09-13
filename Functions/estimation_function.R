@@ -96,7 +96,8 @@ estimation <- function(sim, t0, bands, iter, warm, norm, method){
   
   
   if("SMAC" %in% method) {
-    out$SMAC <- SMAC(ym.pre, x.pre, x, treated_radius)
+    out$SMAC <- SMAC(ym.pre = ym.pre, x.pre = x.pre, x = x,
+                     treated_radius = treated_radius)
     print("SMAC estimates done")
   }
   
