@@ -117,6 +117,7 @@ sim_model<-function(seed_b, seed_t, seed_e,
   wn <- cbind(wn, errors_0)
   colnames(wn) <- colnames(errors)
   
+  # - GP! - Don't change the line below.
   ee <- sqrt(e_weight) * errors + sqrt(1 - e_weight) * wn
   #corrplot::corrplot(cor(errors))
   
