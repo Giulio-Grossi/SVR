@@ -68,8 +68,8 @@ ci <- function(sim, est, cal, norm){
     lower <- matrix(nrow=time_periods, ncol=bands)
     upper <- matrix(nrow=time_periods, ncol=bands)
     for(i in 1 : bands) {
-      lower[,i] <- apply(est[["SMAC"]]$ynn[,,i], 2, 0.025)
-      upper[,i] <- apply(est[["SMAC"]]$ynn[,,i], 2, 0.975)
+      lower[, i] <- apply(est[["SMAC"]]$ynn[,,i], 2, 0.025)
+      upper[, i] <- apply(est[["SMAC"]]$ynn[,,i], 2, 0.975)
       store <- cbind(store, loc)
     }
     
