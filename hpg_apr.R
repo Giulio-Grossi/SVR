@@ -145,7 +145,7 @@ est <- estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
 
 cal <- calculation(sim = sim, est = est, bands = bands, norm = TRUE)
 point <- point_estimate(sim, cal) ## it calculates bias and MSE
-ci <- ci(sim = sim, est = est, cal = cal, norm = T)
+ci <- ci(sim = sim, est = est, cal = cal, norm = TRUE)
 coverage <- coverage(sim, ci)
 
 
