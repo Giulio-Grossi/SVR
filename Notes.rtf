@@ -15,13 +15,11 @@ sim_model\
 estimation_function\
 SMAC\
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \'97 I have looked quickly at\
+\'97 I have looked quickly at\
 \
 sepBVR, BVR.stan\
 sepBSC, BSC.stan\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
+\
 \'97 I have not looked closely at\
 \
 sepSC, SCM\
@@ -50,7 +48,6 @@ For sp_range we should use 0.001, 0.3, 0.6.\
 \cf0 \cb1 \
 \
 \
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \cb2 % \'97\'97\'97\'97\'97\'97\'97\'97 For the estimation_function.R file \'97\'97\'97\'97\'97\'97\'97\'97 %\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
@@ -59,10 +56,23 @@ For sp_range we should use 0.001, 0.3, 0.6.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \cb3 Question \cb4  Is there a reason why separate ridge and pooled ridge are estimated differently? Why use cv.glmnet for separate ridge and tcv.ridge for pooled ridge?\
 \
-\
 For the Pooled ridge: We are not using this.\
 \
 If we use it @\cb1 Giulio, please double-check the pooled ridge code. Comments on pooled ridge function.\cb4 \
 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \cb2 % \'97\'97\'97\'97\'97\'97\'97\'97 For the ci_function.R file \'97\'97\'97\'97\'97\'97\'97\'97 %\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \cb3 TO DO (1): \cb1  ci_shen makes no sense. It uses the true values (which in principle we would not know) to create confidence intervals. This is not correct, and they should not be trusted.\cb3 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 TO DO (2): \cb1  The confidence interval for SMAC uses the predictions from the stan fit that are standardized. Don\'92t these need to be multiplied with SD and + mean?\
+\
+\cb3 TO DO (3): \cb1  CI and coverage calculations make sense to be in one file. Why split them in two?\
+\cb3 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
 \
 }
