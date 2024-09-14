@@ -34,11 +34,11 @@ source("Methods/helper/wrapper.R")
 # Function for performing synthetic controls.
 source("Methods/helper/SCM_function.R")
 source('Methods/sepSC_method.R')
-source('Methods/sepSC_calc_function.R')
+source('Functions/helper/sepSC_calc_function.R')
 
 # Function for performing separate vertical regression with ridge.
 source('Methods/sepSR_method.R')
-source('Methods/sepSR_calc_function.R')
+source('Functions/helper/sepSR_calc_function.R')
 
 # Function for performing Bayesian separate vertical regression.
 source('Methods/sepBVR_method.R')
