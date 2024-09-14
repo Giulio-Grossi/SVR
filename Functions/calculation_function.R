@@ -6,89 +6,85 @@
 ## @ norm <- normalization of outcomes - pre treatment
 
 
-calculation <- function(sim, est, norm) {
-
+calculation <- function(sim, est, bands, norm) {
+  
+  # If the data are not standardized, we do not need to rescale.
+  means <- rep(0, bands)
+  sds <- rep(1, bands)
+  
   # Standardizing the data using the preset function.
-  if (norm == T) {
+  if (norm) {
     sim_std <- preset(sim, t0)
     sim <- sim_std$std
-    means <- sim_std$means
-    sds <- sim_std$sds
+    means <- sim_std$means[1 : bands]
+    sds <- sim_std$sds[1 : bands]
   }
   
-  ## Preparing different matrix config for estimation 
-  #  pre/post treatment
+  # Preparing the control unit data.
+  x = sim[, (bands + 1) : ncol(sim)]  # Matrix, all time periods
   
-  # Getting the treated unit data:
-  ym = sim[, 1 : bands]  # As a matrix over all time periods.
-  ym.pre = sim[1:t0, 1:bands] # As a matrix in pre-intervention.
   
-  # Getting the control unit data.
-  x = sim[, (bands + 1) : (num_controls + bands)]  # Matrix, all time periods
-  x.pre = sim[1 : t0, ((bands) + 1) : (num_controls + bands)]  # Matrix, pre-intervention
+  out = list()
   
-
-  out=list()
   ### 1.0 SEPARATED SCM
   if ("SC" %in% names(est)){
-  out$SC=cal_sepSC(est,x)  
+    out$SC = sepSC_calc(estSC = est[["SC"]], x = x, means = means, sds = sds) 
   }
   
   
   ### 2.0 SEPARATED VERTICAL REGRESSION WITH RIDGE PEN
   if ("SR" %in% names(est)){
-    out$SR=cal_sepSR(est,x)  
+    out$SR <- sepSR_calc(estSR = est[["SR"]], x = x, means = means, sds = sds)
   }
   
   ### 3.0 MULTIVARIATE OLS
   if ("OLS" %in% names(est)){
-   c.pool.ols = as.matrix(est[["OLS"]])
-   out$OLS = x %*% c.pool.ols
+    out$OLS = cbind(1, x) %*% as.matrix(est[["OLS"]])
+    for (ii in 1 : bands) {
+      out$OLS[, ii] <- out$OLS[, ii] * sds[ii] + means[ii]
+    }
   }
-
+  
   ### 4.0 BAYESIAN VERTICAL REGRESSION
-  if ("BVR" %in% names(est)){
-    mat=matrix(nrow=nrow(x), ncol=bands)
-    for(i in 1:bands){
-      mat[,i]=apply(est[["BVR"]][[i]]$y_new,2,median)
+  if ("BVR" %in% names(est)) {
+    mat <- matrix(nrow = nrow(x), ncol = bands)  # For the posterior mean
+    mat_med <- matrix(nrow = nrow(x), ncol = bands)  # For the posterior median
+    for (i in 1 : bands) {
+      samples <- est[["BVR"]][[i]]$y_new * sds[i] + means[i]
+      mat[, i] <- apply(samples, 2, mean)
+      mat_med[, i] <- apply(samples, 2, median)
     }
-    
-    out$BVR=mat
+    out$BVR <- mat
+    out$BVRmedian <- mat_med  # What we were keeping track before as BVR.
   }
-
+  
+  
   ### 5.0 BAYESIAN SYNTHETIC CONTROL
-  if ("BSC" %in% names(est)){
-    mat=matrix(nrow=nrow(x), ncol=bands)
-    for(i in 1:bands){
-      mat[,i]=apply(est[["BSC"]][[i]]$y_new,2,median)
+  if ("BSC" %in% names(est)) {
+    mat <- matrix(nrow = nrow(x), ncol = bands)  # For the posterior mean
+    mat_med <- matrix(nrow = nrow(x), ncol = bands)  # For the posterior median
+    for (i in 1 : bands) {
+      samples <- est[["BSC"]][[i]]$y_new * sds[i] + means[i]
+      mat[, i] <- apply(samples, 2, mean)
+      mat_med[, i] <- apply(samples, 2, median)
     }
-
-    out$BSC=mat
+    out$BSC <- mat
+    out$BSCmedian <- mat_med  # What we were keeping track before as BSC.
   }
+  
   
   ### 6.0 SMAC
   if ("SMAC" %in% names(est)){
-    store=vector()
-    for(i in 1:bands){
-      loc=apply(est[["SMAC"]]$ynn[,,i],2,median)
-      store=cbind(store, loc)
+    mat <- matrix(nrow = nrow(x), ncol = bands)  # For the posterior mean
+    mat_med <- matrix(nrow = nrow(x), ncol = bands)  # For the posterior median
+    for (i in 1 : bands) {
+      samples <- est[["SMAC"]]$ynn[, , i] * sds[i] + means[i]
+      mat[, i] <- apply(samples, 2, mean)
+      mat_med[, i] <- apply(samples, 2, median)
     }
-    out$SMAC=store
+    out$SMAC <- mat
+    out$SMACmedian <- mat_med
   }
   
-  library(purrr)
-  out=compact(out)
-  names(out)=names(est)
-
-  ### rescale outcomes
-  
-   if (norm==T){
-     for (k in 1:length(out)){
-       for (i in 1:bands){
-         out[[k]][,i]=(out[[k]][,i]*sds[i])+means[i]
-       }
-     }
-   }
-
   return(out)
 }

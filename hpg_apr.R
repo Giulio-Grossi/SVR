@@ -34,11 +34,11 @@ source("Methods/helper/wrapper.R")
 # Function for performing synthetic controls.
 source("Methods/helper/SCM_function.R")
 source('Methods/sepSC_method.R')
-source('Methods/sepSC_calculation.R')
+source('Methods/sepSC_calc_function.R')
 
 # Function for performing separate vertical regression with ridge.
 source('Methods/sepSR_method.R')
-source('Methods/sepSR_calculation.R')
+source('Methods/sepSR_calc_function.R')
 
 # Function for performing Bayesian separate vertical regression.
 source('Methods/sepBVR_method.R')
@@ -104,7 +104,7 @@ print(errors_sp)
 
 
 # ------- The methods that will be used.
-method <- c("SC","SR", "BVR","BSC","SMAC")
+method <- c("SC","SR", "OLS", "BVR", "BSC", "SMAC")
 
 # --------- The treated units.
 treated_radius <- seq(0, 1, length.out = bands)
@@ -143,7 +143,7 @@ est <- estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
 
 # ---------------- PART D: Getting predictions ---------------- #
 
-cal <- calculation(sim = sim, est = est, norm = T)
+cal <- calculation(sim = sim, est = est, bands = bands, norm = TRUE)
 point <- point_estimate(sim, cal) ## it calculates bias and MSE
 ci <- ci(sim = sim, est = est, cal = cal, norm = T)
 coverage <- coverage(sim, ci)
