@@ -5,7 +5,7 @@
 #' the control units.
 #' 
 #' return the predicted values for the vertical regression estimation 
-cal_sepSR <- function(est, x) {
+sepSR_calc <- function(est, x) {
   
   ## setup
   c.sep.rid=est[["SR"]]
