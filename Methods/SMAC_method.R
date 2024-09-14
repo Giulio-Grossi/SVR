@@ -4,14 +4,14 @@
 #' outcomes units.
 #' @param x.pre Matrix T0 x (# controls) for the pre-intervention period and
 #' the control units.
-#' #' @param x Matrix T x (# controls) for the pre-intervention and 
+#' @param x Matrix T x (# controls) for the pre-intervention and 
 #' post-intervention period and the control units.
-#' 
 #' @param treated_radius vector of (# treated units) distances across treated
+#' @param chains How many MCMC chains to run. Defaults to 3.
 #' 
 #' Depends on the MGP.stan file, and rstan library
 #' 
-SMAC <- function(ym.pre, x.pre, x, treated_radius) {
+SMAC <- function(ym.pre, x.pre, x, treated_radius, chains = 3) {
   
   # arguments
   bands <- ncol(ym.pre)
@@ -39,9 +39,9 @@ SMAC <- function(ym.pre, x.pre, x, treated_radius) {
   fit <- rstan::stan(
     file = "Methods/SMAC.stan",  # SMAC.
     data = ss_data,
-    cores = 3,
+    cores = min(chains, 3),
     iter = iter,
-    chains = 3,
+    chains = chains,
     verbose = F,
     warmup = warm,
     control = list(

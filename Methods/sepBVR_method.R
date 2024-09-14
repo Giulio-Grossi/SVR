@@ -9,7 +9,7 @@
 #' 
 #' Depends on the BVR.stan file, and rstan library
 #' 
-sepBVR <- function(ym.pre, x.pre, x) {
+sepBVR <- function(ym.pre, x.pre, x, chains = 3) {
   
   # arguments
   bands <- ncol(ym.pre)
@@ -31,9 +31,9 @@ sepBVR <- function(ym.pre, x.pre, x) {
     fit <- rstan::stan(
       file = "Methods/BVR.stan",  # Bayesian vertical regression
       data = ss_data,
-      cores = 3,
+      cores = min(chains, 3),
       iter = iter,
-      chains = 3,
+      chains = chains,
       verbose = F,
       warmup = warm,
       control = list(

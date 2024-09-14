@@ -9,7 +9,7 @@
 #' 
 #' Depends on the BSC.stan file, and rstan library
 #' 
-sepBSC <- function(ym.pre, x.pre, x) {
+sepBSC <- function(ym.pre, x.pre, x, chains = 3) {
   
   # arguments
   bands <- ncol(ym.pre)
@@ -31,9 +31,9 @@ sepBSC <- function(ym.pre, x.pre, x) {
     fit <- rstan::stan(
       file = "Methods/BSC.stan",  # Bayesian Synthetic control
       data = ss_data,
-      cores = 3,
+      cores = min(chains, 3),
       iter = iter,
-      chains = 3,
+      chains = chains,
       verbose = F,
       warmup = warm,
       control = list(
