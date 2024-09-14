@@ -6,55 +6,30 @@
 
 
 point_estimate <- function(sim, cal) {
-  bias=list();mse=list()
-  ### 1.0 SEPARATED SCM
-  if ("SC" %in% names(cal)){
-    bands=ncol(cal$SC)
-    bias$SC=sim[,1:bands] - cal$SC
-    mse$SC=(sim[,1:bands] - cal$SC)^2
-  }
   
+  # The bias is the prediction minus the true value.
+  bias <- list()
+  # I call this squared error because this is not the MEAN squared error.
+  SqE <- list()
   
-  ### 2.0 SEPARATED VERTICAL REGRESSION WITH RIDGE PEN
-  if ("SR" %in% names(cal)){
-    bands=ncol(cal$SR)
-    bias$SR=sim[,1:bands] - cal$SR
-    mse$SR=(sim[,1:bands] - cal$SR)^2
-    }
+  # All elements in cal have the bands as columns, so we can get bands once.
+  bands <- ncol(cal[[1]])
   
-  ### 3.0 MULTIVARIATE OLS
-  if ("OLS" %in% names(cal)){
-    bands=ncol(cal$OLS)
-    bias$OLS=sim[,1:bands] - cal$OLS
-    mse$OLS=(sim[,1:bands] - cal$OLS)^2
-  }
+  # Loop over the predictions from the different methods. They are all in the
+  # form of matrix with rows being time periods and columns being treated
+  # units.
   
-  ### 4.0 BAYESIAN VERTICAL REGRESSION
-  if ("BVR" %in% names(cal)){
-    bands=ncol(cal$BVR)
-    bias$BVR=sim[,1:bands] - cal$BVR
-    mse$BVR=(sim[,1:bands] - cal$BVR)^2
-    }
-
-  
-  ### 5.0 BAYESIAN SYNTHETIC CONTROL
-  if ("BSC" %in% names(cal)){
-    bands=ncol(cal$BSC)
-    bias$BSC=sim[,1:bands] - cal$BSC
-    mse$BSC=(sim[,1:bands] - cal$BSC)^2
-    }
+  for (ii in 1 : length(cal)) {
     
-  ### 6.0 SMAC
-  if ("SMAC" %in% names(cal)){
-    bands=ncol(cal$SMAC)
-    bias$SMAC=sim[,1:bands] - cal$SMAC
-    mse$SMAC=(sim[,1:bands] - cal$SMAC)^2
+    bias[[ii]] <- cal[[ii]] - sim[, 1 : bands]
+    SqE[[ii]] <- bias[[ii]] ^ 2
+    
   }
   
-  library(purrr)
-  bias=compact(bias)
-  mse=compact(mse)
-  out=list(bias, mse)
+  names(bias) <- names(cal)
+  names(SqE) <- names(cal)
+  
+  out <- list(bias = bias, SqE = SqE)
   
   return(out)
 }
