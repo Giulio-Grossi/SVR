@@ -74,7 +74,7 @@ ci <- function(sim, est, cal, norm){
     }
     
     loc <- list(lower, upper)
-    names(loc) <- c("lower_bound","upper_bound")
+    names(loc) <- c("lower_bound", "upper_bound")
     out$SMAC <- loc
   }
   
