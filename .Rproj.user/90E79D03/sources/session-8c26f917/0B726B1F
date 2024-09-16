@@ -1,0 +1,27 @@
+{
+    "id": "0B726B1F",
+    "path": "~/SMAC/Functions/ci_function.R",
+    "project_path": "Functions/ci_function.R",
+    "type": "r_source",
+    "hash": "1751124331",
+    "contents": "",
+    "dirty": false,
+    "created": 1726496502506.0,
+    "source_on_save": false,
+    "relative_order": 10,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "75,53",
+        "scrollLine": "57"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1726501860,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1726501860143,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -10,13 +10,13 @@
 #'
 
 ci_shen<-function(true, estimate, alpha){
-  
+alpha=as.matrix(alpha)
 error = true - estimate
-v0=alpha%*%error%*%t(alpha)
-se_treated=sqrt(v0)
 upper<-matrix(ncol=ncol(estimate), nrow=nrow(estimate))
 lower<-matrix(ncol=ncol(estimate), nrow=nrow(estimate))
 for(i in 1:ncol(estimate)){
+  v0=t(alpha)%*%cov(t(error))%*%(alpha)
+  se_treated=sqrt(v0)
   upper[,i] = estimate[,i] + 1.96*se_treated[i]
   lower[,i] = estimate[,i] - 1.96*se_treated[i]
 }
