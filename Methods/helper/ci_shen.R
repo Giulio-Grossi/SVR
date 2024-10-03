@@ -9,7 +9,7 @@
 #' 
 #'
 
-ci_shen<-function(estimate, sim, bands, t0){
+ci_shen<-function(sim, estimate, bands, t0){
 x <- sim[,(bands+1):ncol(sim)]
 true <- sim[,1:bands]
 alpha <- hz_reg(x, t0)
