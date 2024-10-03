@@ -1,0 +1,23 @@
+dim(sim)
+
+n_control=10
+n_treated=3
+time_periods=40
+t0=20
+
+sim=t(sim)
+y=sim
+y0=y[(bands+1): nrow(y), 1:t0]
+dim(y0)
+svd<-svd(y0)
+h_v<-svd$v%*%t(svd$v)
+
+
+sigma_v<-(1/(t0-n_control))*sum((diag(t0) - h_v )
+                                * sim[1,])^2*diag(20)
+
+model<-lm(sim[1,1:t0] ~ -1 +t(y0))
+y_pred<-model$coefficients%*%y0
+errori<-sim[1,1:t0] - y_pred
+
+sigma_vii<-(1/(t0-n_control))*sum(errori)^2*diag(20)

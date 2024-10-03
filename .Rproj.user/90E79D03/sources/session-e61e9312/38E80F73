@@ -1,27 +1,27 @@
 {
-    "id": "42CD24D2",
-    "path": "~/SMAC/Functions/coverage_function.R",
-    "project_path": "Functions/coverage_function.R",
+    "id": "38E80F73",
+    "path": "~/SMAC/Functions/ci_function.R",
+    "project_path": "Functions/ci_function.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "1673017766",
     "contents": "",
     "dirty": false,
-    "created": 1726496497369.0,
+    "created": 1727973364545.0,
     "source_on_save": false,
-    "relative_order": 9,
+    "relative_order": 8,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "9,0",
-        "scrollLine": "7"
+        "cursorPosition": "45,47",
+        "scrollLine": "39"
     },
     "folds": "",
-    "lastKnownWriteTime": 1726480739,
+    "lastKnownWriteTime": 1727974061,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1726480739,
+    "last_content_update": 1727974061208,
     "read_only": false,
     "read_only_alternatives": []
 }
