@@ -3,11 +3,11 @@ rm(list=ls())
 library(mvtnorm)
 source("var.R")
 
-germany.pre <- read.csv("ecta200628_Package/data/germany/pre_outcomes.csv")
+germany.pre <- read.csv("C:/Users/giuli/Downloads/pre_outcomes.csv")
 dim(germany.pre)
 head(germany.pre)
 
-germany.post <- read.csv("ecta200628_Package/data/germany/post_outcomes.csv")
+germany.post <- read.csv("C:/Users/giuli/Downloads/post_outcomes.csv")
 dim(germany.post)
 head(germany.post)
 

@@ -1,0 +1,27 @@
+{
+    "id": "A145464E",
+    "path": "~/SMAC/Methods/helper/cattaneo_sc_estimation.R",
+    "project_path": "Methods/helper/cattaneo_sc_estimation.R",
+    "type": "r_source",
+    "hash": "1019435655",
+    "contents": "",
+    "dirty": false,
+    "created": 1728332943388.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "25,0",
+        "scrollLine": "15"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1728339047,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1728339047946,
+    "read_only": false,
+    "read_only_alternatives": []
+}
