@@ -30,6 +30,7 @@ source("Methods/helper/ci_bayes.R")
 source("Methods/helper/coverage.R")
 source("Methods/helper/binder.R")
 source("Methods/helper/wrapper.R")
+source("Methods/helper/helper_vertical_regression.R")
 
 # Function for performing synthetic controls.
 source("Methods/helper/SCM_function.R")
@@ -39,6 +40,10 @@ source('Functions/helper/sepSC_calc_function.R')
 # Function for performing separate vertical regression with ridge.
 source('Methods/sepSR_method.R')
 source('Functions/helper/sepSR_calc_function.R')
+
+# Function for performing separate vertical regression with SVD
+source('Methods/sepOLS_method.R')
+source('Functions/helper/helper_vertical_regression')
 
 # Function for performing Bayesian separate vertical regression.
 source('Methods/sepBVR_method.R')

@@ -1,27 +1,26 @@
 {
-    "id": "577B1EBF",
-    "path": "~/SMAC/Methods/helper/ci_shen.R",
-    "project_path": "Methods/helper/ci_shen.R",
+    "id": "D63E39FA",
+    "path": "~/SMAC/Methods/helper/sepOLS_method.R",
+    "project_path": "Methods/helper/sepOLS_method.R",
     "type": "r_source",
-    "hash": "3270150995",
+    "hash": "2693588442",
     "contents": "",
     "dirty": false,
-    "created": 1727972738524.0,
+    "created": 1728324638918.0,
     "source_on_save": false,
     "relative_order": 9,
     "properties": {
-        "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "11,31",
-        "scrollLine": "9"
+        "cursorPosition": "1,19",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1727975079,
+    "lastKnownWriteTime": 1728324916,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1727975079463,
+    "last_content_update": 1728324916803,
     "read_only": false,
     "read_only_alternatives": []
 }
