@@ -67,8 +67,7 @@ estimation <- function(sim, t0, bands, iter, warm, norm = TRUE, method,
     # regression in a simultaneous estimate without passing through 
     # the x_matrix(x) argument. 
     
-    lmod <- lm(ym.pre ~ x.pre)
-    out$OLS <- lmod$coef
+    out$OLS = sepOLS(ym.pre = ym.pre, x.pre = x.pre)
     # The output is a matrix of dimension ((num_controls + 1) x bands) with
     # estimated coefficients. The first row is the intercept.
     print("OLS estimates done")
