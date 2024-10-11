@@ -43,7 +43,6 @@ source('Functions/helper/sepSR_calc_function.R')
 
 # Function for performing separate vertical regression with SVD
 source('Methods/sepOLS_method.R')
-source('Functions/helper/helper_vertical_regression')
 
 # Function for performing Bayesian separate vertical regression.
 source('Methods/sepBVR_method.R')
