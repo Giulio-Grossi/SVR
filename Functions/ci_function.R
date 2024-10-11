@@ -34,7 +34,7 @@ ci <- function(sim, est, cal, t0, norm){
   if ("SC" %in% names(cal)) {
     true <- sim[1:t0, 1 : bands]
     estimate <- cal$SC[1:t0,]
-    out$SC <- ci_shen(sim, estimate, bands, t0)
+    out$SC <- ci_shen(sim, estimate, bands, t0, means = means, sds = sds)
   }
   
   
@@ -42,14 +42,14 @@ ci <- function(sim, est, cal, t0, norm){
   if ("SR" %in% names(cal)) {
     true <- sim[1:t0, 1 : bands]
     estimate <- cal$SR[1:t0,]
-    out$SR <- ci_shen(sim, estimate, bands, t0)
+    out$SR <- ci_shen(sim, estimate, bands, t0, means = means, sds = sds)
   }
   
   ### 3.0 MULTIVARIATE OLS
   if ("OLS" %in% names(cal)) {
     true <- sim[, 1 : bands]
     estimate <- cal$OLS
-    out$OLS <- ci_shen(sim, estimate, bands, t0)
+    out$OLS <- ci_shen(sim, estimate, bands, t0, means = means, sds = sds)
   }
   
   # -GP- The CIs for the Bayesian methods below have been corrected to be on

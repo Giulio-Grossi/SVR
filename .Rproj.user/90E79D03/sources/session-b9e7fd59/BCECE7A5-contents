@@ -9,8 +9,11 @@
 #' 
 #'
 
-ci_shen<-function(sim, estimate, bands, t0){
+ci_shen<-function(sim, estimate, bands, t0, means = NULL, sds = NULL){
   data <- t(sim[,(bands+1):ncol(sim)])
+  
+  if (is.null(means)) means <- rep(0, bands)
+  if (is.null(sds)) sds <- rep(1, bands)
   # time indices   
   pre_cols  = data[,1:t0]
   post_cols = data[,(t0+1):ncol(data)]
@@ -52,9 +55,13 @@ ci_shen<-function(sim, estimate, bands, t0){
     se_treated <-c(rep(0, t0),sqrt(v0.vt))
     
     for(tt in (t0+1):ncol(data)){
-    upper[,i] = estimate[,i] + 1.96*se_treated[tt]
+    upper[,i] = estimate[,i] + 1.96*se_treated[tt] ## Re-standardize
     lower[,i] = estimate[,i] - 1.96*se_treated[tt]
     }
+    
+    upper[,i] <- upper[,i]*sds[i] + means[i]
+    lower[,i] <- lower[,i]*sds[i] + means[i]
+    
   }
 
 out=list(lower, upper) 

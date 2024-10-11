@@ -62,11 +62,6 @@ estimation <- function(sim, t0, bands, iter, warm, norm = TRUE, method,
   }
   
   if ("OLS" %in% method){ # Separate OLS for each treated unit.
-    
-    ## - GG - we can estimate the OLS coefficient also via multivariate
-    # regression in a simultaneous estimate without passing through 
-    # the x_matrix(x) argument. 
-    
     out$OLS = sepOLS(ym.pre = ym.pre, x.pre = x.pre)
     # The output is a matrix of dimension ((num_controls + 1) x bands) with
     # estimated coefficients. The first row is the intercept.
@@ -97,7 +92,7 @@ estimation <- function(sim, t0, bands, iter, warm, norm = TRUE, method,
   
   if("SMAC" %in% method) {
     out$SMAC <- SMAC(ym.pre = ym.pre, x.pre = x.pre, x = x,
-                     treated_radius = treated_radius, chains = chains)
+                     treated_radius = treated_radius, chains = chains, intercept=T)
     # The output of the SMAC stan fit including coefficients, spatial
     # parameters for the errors and the coefficients, weight of spatial VS
     # iid error, covariance matrix, and predictions for the treated units.
