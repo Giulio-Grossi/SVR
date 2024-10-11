@@ -1,9 +1,9 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2761
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;\red136\green255\blue255;\red194\green0\blue4;\red255\green255\blue255;
-}
+\red231\green62\blue255;\red251\green0\blue7;}
 {\*\expandedcolortbl;;\cssrgb\c59016\c100000\c100000;\cssrgb\c81490\c4389\c0;\cssrgb\c100000\c100000\c100000\c0;
-}
+\cssrgb\c93328\c38659\c100000;\cssrgb\c100000\c12195\c0;}
 \margl1440\margr1440\vieww14960\viewh16380\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
@@ -63,16 +63,14 @@ If we use it @\cb1 Giulio, please double-check the pooled ridge code. Comments o
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \cb2 % \'97\'97\'97\'97\'97\'97\'97\'97 For the ci_function.R file \'97\'97\'97\'97\'97\'97\'97\'97 %\
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \cb3 TO DO (1): \cb1  ci_shen makes no sense. It uses the true values (which in principle we would not know) to create confidence intervals. This is not correct, and they should not be trusted.\cb3 \
+\cf0 \cb3 \
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 TO DO (2): \cb1  The confidence interval for SMAC uses the predictions from the stan fit that are standardized. Don\'92t these need to be multiplied with SD and + mean?\
+\cb5 Comments Oct 11, 2024\
 \
-\cb3 TO DO (3): \cb1  CI and coverage calculations make sense to be in one file. Why split them in two?\
+\cb4 1. I added the intercept back in Bayesian Vertical Regression. Inference for BVR is through posterior samples, so. I believe we should keep the intercept.\
+\
+2. \cb6 TO DO:\cb4  In ci_function() we standardize the data in the very beginning. Need to be careful that ci() functions then do not rescale the data properly. I fixed the ci_bayes() function by providing the means and sds. We must fix ci_shen() as well.\
+\
 \cb3 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
-\
 }

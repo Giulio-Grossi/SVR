@@ -69,15 +69,16 @@ rstan_options(auto_write = FALSE)
 # ----------- PART A: Setting the simulation parameters ----------- #
 
 ## dim parameter
-num_controls <- 10
+num_controls <- 7
 t0 <- tt_periods
 time_periods <- t0 + 20
 time_periods_controls <- 80  # -GP- Do not change this with t0.
-bands <- 3
+bands <- 2
 
 ## sampling pars
 iter <- 6000
 warm <- 2000
+chains <- 3
 ## sim pars
 
 # ----- Spatial and temporal correlation parameters.
@@ -138,19 +139,20 @@ set.seed(index)
 
 # ---------------- PART C: Estimating the models ---------------- #
 
-iter <- 10
-warm <- 5
+iter <- 4
+warm <- 2
+chains <- 1
 
 est <- estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
-                  norm = TRUE, method = method)
+                  norm = TRUE, method = method, chains = chains)
 
 
 # ---------------- PART D: Getting predictions ---------------- #
 
 cal <- calculation(sim = sim, est = est, bands = bands, norm = TRUE)
 point <- point_estimate(sim, cal) ## it calculates bias and MSE
-ci <- ci(sim = sim, est = est, cal = cal, norm = TRUE)
-coverage <- coverage(sim, ci)
+c_interv <- ci(sim = sim, est = est, cal = cal, t0 = t0, norm = TRUE)
+coverage <- coverage(sim, c_interv)
 
 
 
