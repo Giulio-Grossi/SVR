@@ -14,7 +14,7 @@ sepOLS <- function(ym.pre, x.pre){
   for (i in 1 : bands) {
     v = ym.pre[, i]
     beta = pseudo.inv(x.pre)%*%v  # alpha = 0 specifies ridge.
-    c.sep.rid = cbind(c.sep.ols, beta)
+    c.sep.ols = cbind(c.sep.ols, beta)
   }
   colnames(c.sep.ols) <- paste('treated', 1 : bands)
   return(c.sep.ols)
