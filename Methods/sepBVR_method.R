@@ -19,10 +19,10 @@ sepBVR <- function(ym.pre, x.pre, x, chains = 3) {
   for (i in 1:bands){
     
     ss_data = list(
-      x = x.pre,
+      x = cbind(1, x.pre),
       y = ym.pre[,i],
       N = nrow(ym.pre),
-      C = num_controls,
+      C = num_controls + 1,
       X_new=cbind(1,x),
       N_new=nrow(x)
     )
