@@ -30,20 +30,23 @@ ci <- function(sim, est, cal, t0, norm){
   time_periods = nrow(sim)
   out <- list()
   
-  ### 1.0 SEPARATED SCM
-  if ("SC" %in% names(cal)) {
-    true <- sim[1:t0, 1 : bands]
-    estimate <- cal$SC[1:t0,]
-    out$SC <- ci_shen(sim, estimate, bands, t0, means = means, sds = sds)
-  }
-  
-  
-  ### 2.0 SEPARATED VERTICAL REGRESSION WITH RIDGE PEN
-  if ("SR" %in% names(cal)) {
-    true <- sim[1:t0, 1 : bands]
-    estimate <- cal$SR[1:t0,]
-    out$SR <- ci_shen(sim, estimate, bands, t0, means = means, sds = sds)
-  }
+  # Shen method has only been shown to work for OLS, not SC or ridge.
+  #
+  # ### 1.0 SEPARATED SCM
+  # if ("SC" %in% names(cal)) {
+  #   true <- sim[1:t0, 1 : bands]
+  #   estimate <- cal$SC[1:t0,]
+  #   out$SC <- ci_shen(sim, estimate, bands, t0, means = means, sds = sds)
+  # }
+  # 
+  # 
+  # ### 2.0 SEPARATED VERTICAL REGRESSION WITH RIDGE PEN
+  # if ("SR" %in% names(cal)) {
+  #   true <- sim[1:t0, 1 : bands]
+  #   estimate <- cal$SR[1:t0,]
+  #   out$SR <- ci_shen(sim, estimate, bands, t0, means = means, sds = sds)
+  # }
+  #
   
   ### 3.0 MULTIVARIATE OLS
   if ("OLS" %in% names(cal)) {

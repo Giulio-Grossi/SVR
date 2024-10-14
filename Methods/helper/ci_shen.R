@@ -52,19 +52,18 @@ ci_shen<-function(sim, estimate, bands, t0, means = NULL, sds = NULL){
     var.hz <- v.homo$v.hz
     var.vt <- v.homo$v.vt
     v0.vt <- diag(var.vt)
+    
+    # se_treated: Standard deviation of predictions for standardized data.
     se_treated <-c(rep(0, t0),sqrt(v0.vt))
     
     for(tt in (t0+1):ncol(data)){
-    upper[,i] = estimate[,i] + 1.96*se_treated[tt] ## Re-standardize
-    lower[,i] = estimate[,i] - 1.96*se_treated[tt]
+      upper[,i] = estimate[,i] + 1.96*se_treated[tt]*sds[i] ## Re-standardize
+      lower[,i] = estimate[,i] - 1.96*se_treated[tt]*sds[i]
     }
     
-    upper[,i] <- upper[,i]*sds[i] + means[i]
-    lower[,i] <- lower[,i]*sds[i] + means[i]
-    
   }
-
-out=list(lower, upper) 
-names(out)=c("lower_bound","upper_bound" )
-return(out)  
+  
+  out=list(lower, upper) 
+  names(out)=c("lower_bound","upper_bound" )
+  return(out)  
 }
