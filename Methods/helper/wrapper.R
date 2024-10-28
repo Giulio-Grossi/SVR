@@ -10,7 +10,7 @@
 
 
 
-wrapper<-function(input, methods){
+wrapper<-function(input, methods, mode){
   
   ## Here we generate an auxiliary list of #methods$#datasets to store the test 
   ## statistics, and we assign the name of the methods 
@@ -31,7 +31,18 @@ wrapper<-function(input, methods){
       ### and as second level the datasets
       
       for(kk in 1:ll){
-      rr[[methods[i]]][[kk]]<-input[[kk]][[methods[i]]]
+        
+      if(mode==1){
+        rr[[methods[i]]][[kk]]<-input[[kk]]$bias[[methods[i]]]
+      }
+        if(mode==2){
+        rr[[methods[i]]][[kk]]<-input[[kk]]$SqE[[methods[i]]]
+        }
+        if(mode==3){
+        rr[[methods[i]]][[kk]]<-input[[kk]][[methods[i]]] 
+        }
+      
+        
       }
       
       ### We generate the auxiliary list of output

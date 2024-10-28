@@ -110,6 +110,7 @@ print(errors_sp)
 
 # ------- The methods that will be used.
 method <- c("SC","SR", "OLS", "BVR", "BSC", "SMAC")
+method <- c("SC","SR", "OLS")
 
 # --------- The treated units.
 treated_radius <- seq(0, 1, length.out = bands)

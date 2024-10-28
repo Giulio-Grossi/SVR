@@ -1,0 +1,26 @@
+{
+    "id": "788B79CC",
+    "path": "~/SMAC/Methods/helper/postestimation.R",
+    "project_path": "Methods/helper/postestimation.R",
+    "type": "r_source",
+    "hash": "3605104849",
+    "contents": "",
+    "dirty": false,
+    "created": 1729693254824.0,
+    "source_on_save": false,
+    "relative_order": 10,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "33,39",
+        "scrollLine": "24"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1729623652,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1729623652,
+    "read_only": false,
+    "read_only_alternatives": []
+}

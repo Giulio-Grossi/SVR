@@ -1,0 +1,27 @@
+{
+    "id": "50DA0F76",
+    "path": "~/SMAC/Methods/helper/wrapper_point.R",
+    "project_path": "Methods/helper/wrapper_point.R",
+    "type": "r_source",
+    "hash": "3954513399",
+    "contents": "",
+    "dirty": false,
+    "created": 1729693336410.0,
+    "source_on_save": false,
+    "relative_order": 11,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "37,14",
+        "scrollLine": "32"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1729859445,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1729859445692,
+    "read_only": false,
+    "read_only_alternatives": []
+}
