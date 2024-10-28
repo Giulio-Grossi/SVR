@@ -11,19 +11,13 @@
 #' 
 #' Depends on the MGP.stan file, and rstan library
 #' 
-SMAC <- function(ym.pre, x.pre, x, treated_radius, chains = 3, intercept) {
+SMAC <- function(ym.pre, x.pre, x, treated_radius, chains = 3) {
   
   # arguments
   bands <- ncol(ym.pre)
   time_periods <- nrow(x)
   t0 <- nrow(x.pre)
   
-  if(intercept==T){
-    num_controls <- ncol(x.pre)+1
-    x <- cbind(1,x)
-    x.pre <- cbind(1,x.pre)
-  }
-
   # Without an intercept:
   ss_data = list(
     x = x.pre,

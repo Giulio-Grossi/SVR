@@ -27,7 +27,7 @@ source("Functions/coverage_function.R")
 source("Methods/helper/preset_function.R")
 source("Methods/helper/ci_shen.R")
 source("Methods/helper/ci_bayes.R")
-source("Methods/helper/coverage.R")
+source("Methods/helper/cover_helper.R")
 source("Methods/helper/binder.R")
 source("Methods/helper/wrapper.R")
 source("Methods/helper/helper_vertical_regression.R")
@@ -153,14 +153,14 @@ est <- estimation(sim = sim, t0 = t0, bands = bands, iter = iter, warm = warm,
 cal <- calculation(sim = sim, est = est, bands = bands, norm = TRUE)
 point <- point_estimate(sim, cal) ## it calculates bias and MSE
 c_interv <- ci(sim = sim, est = est, cal = cal, t0 = t0, norm = TRUE)
-coverage <- coverage(sim, c_interv)
+cover <- coverage(sim, interv = c_interv)
 
 
 
 # ---------------- PART E: Saving results ---------------- #
 
 res <- list(sim = sim, est = est, cal = cal, beta_true = beta_true,
-            point = point, ci = ci, coverage = coverage)
+            point = point, ci = c_interv, coverage = cover)
 
 out_path <- paste0('Output/apr_sims/Results/ss', sp_range, '/tt', tt_periods,
                    '/ee', errors_sp)

@@ -9,21 +9,24 @@
 #' 
 #'
 
-ci_shen<-function(sim, estimate, bands, t0, means = NULL, sds = NULL){
-  data <- t(sim[,(bands+1):ncol(sim)])
+ci_shen <- function(sim, estimate, bands, t0, sds = NULL){
   
-  if (is.null(means)) means <- rep(0, bands)
+  data <- t(sim[, (bands + 1) : ncol(sim)])
+  
   if (is.null(sds)) sds <- rep(1, bands)
+
   # time indices   
-  pre_cols  = data[,1:t0]
-  post_cols = data[,(t0+1):ncol(data)]
+  pre_cols  = data[, 1:t0]
+  post_cols = data[, (t0 + 1) : ncol(data)]
   N0 <- nrow(data)
   T0 <- t0
   TT <- ncol(data)
   
-  upper<-matrix(ncol=ncol(estimate), nrow=nrow(estimate))
-  lower<-matrix(ncol=ncol(estimate), nrow=nrow(estimate))
-  for(i in 1:ncol(estimate)){
+  # Dimension (treated units) x (time)
+  upper <- matrix(ncol = bands, nrow = nrow(estimate))
+  lower <- matrix(ncol = bands, nrow = nrow(estimate))
+  
+  for (i in 1 : bands){
     
     Y0_obs  = as.matrix(t(sim[1:t0, (bands+1):ncol(sim)]))
     y_n_obs = sim[1:t0, i]
@@ -47,24 +50,21 @@ ci_shen<-function(sim, estimate, bands, t0, means = NULL, sds = NULL){
     Hv <- V[, 1:r]%*% t(V[, 1:r]) 
     Hv_perp <- diag(1,T0)-Hv
     
-    # uncertainty estimation via homoskedastic-based confidence intervals
+    # Uncertainty estimation via homoskedastic-based confidence intervals
     v.homo <- var_homo(y_n_obs, y_t_obs, Y0_obs, alpha, beta, Hu_perp, Hv_perp)
     var.hz <- v.homo$v.hz
     var.vt <- v.homo$v.vt
     v0.vt <- diag(var.vt)
-    se_treated <-c(rep(0, t0),sqrt(v0.vt))
     
-    for(tt in (t0+1):ncol(data)){
-    upper[,i] = estimate[,i] + 1.96*se_treated[tt] ## Re-standardize
-    lower[,i] = estimate[,i] - 1.96*se_treated[tt]
-    }
+    # se_treated: Standard deviation of predictions for standardized data.
+    se_treated <-c(rep(0, t0), sqrt(v0.vt))
     
-    upper[,i] <- upper[,i]*sds[i] + means[i]
-    lower[,i] <- lower[,i]*sds[i] + means[i]
+    upper[,i] = estimate[,i] + 1.96 * se_treated * sds[i] ## Re-standardize.
+    lower[,i] = estimate[,i] - 1.96 * se_treated * sds[i]
     
   }
-
-out=list(lower, upper) 
-names(out)=c("lower_bound","upper_bound" )
-return(out)  
+  
+  out=list(lower, upper) 
+  names(out)=c("lower_bound","upper_bound" )
+  return(out)  
 }

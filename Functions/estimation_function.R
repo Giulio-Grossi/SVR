@@ -92,7 +92,7 @@ estimation <- function(sim, t0, bands, iter, warm, norm = TRUE, method,
   
   if("SMAC" %in% method) {
     out$SMAC <- SMAC(ym.pre = ym.pre, x.pre = x.pre, x = x,
-                     treated_radius = treated_radius, chains = chains, intercept=T)
+                     treated_radius = treated_radius, chains = chains)
     # The output of the SMAC stan fit including coefficients, spatial
     # parameters for the errors and the coefficients, weight of spatial VS
     # iid error, covariance matrix, and predictions for the treated units.

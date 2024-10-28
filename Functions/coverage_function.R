@@ -8,54 +8,52 @@
 ## Preparing different matrix config for estimation 
 #  pre/post treatment
 
-coverage <- function(sim, ci){
+coverage <- function(sim, interv){
   
-  bands=ncol(ci$SC$upper_bound)
-  time_periods=nrow(ci$SC$upper_bound)
-  out=list()
+  bands <- ncol(interv[[1]]$upper_bound)
+  time_periods <- nrow(interv[[1]]$upper_bound)
+  
+  out <- list()
+  
   ### 1.0 SEPARATED SCM
-  if ("SC" %in% names(ci)){
-   out$SC <- coverage(sim[,1:bands], 
-                      ci$SC$lower_bound, ci$SC$upper_bound)
+  if ("SC" %in% names(interv)){
+    out$SC <- cover(sim[,1:bands], 
+                    interv$SC$lower_bound, interv$SC$upper_bound)
   }
   
   
   ### 2.0 SEPARATED VERTICAL REGRESSION WITH RIDGE PEN
-  if ("SR" %in% names(ci)){
-    out$SR <- coverage(sim[,1:bands], 
-                       ci$SR$lower_bound, ci$SR$upper_bound)
+  if ("SR" %in% names(interv)){
+    out$SR <- cover(sim[,1:bands], 
+                    interv$SR$lower_bound, interv$SR$upper_bound)
   }
   
   ### 3.0 MULTIVARIATE OLS
-  if ("OLS" %in% names(ci)){
-    out$OLS <- coverage(sim[,1:bands], 
-                        ci$OLS$lower_bound, ci$OLS$upper_bound)
+  if ("OLS" %in% names(interv)){
+    out$OLS <- cover(sim[,1:bands], 
+                     interv$OLS$lower_bound, interv$OLS$upper_bound)
   }
   
   ### 4.0 BAYESIAN VERTICAL REGRESSION
-  if ("BVR" %in% names(ci)){
-    out$BVR <- coverage(sim[,1:bands], 
-                        ci$BVR$lower_bound, ci$BVR$upper_bound)
+  if ("BVR" %in% names(interv)){
+    out$BVR <- cover(sim[,1:bands], 
+                     interv$BVR$lower_bound, interv$BVR$upper_bound)
   } 
   
   
   ### 5.0 BAYESIAN SYNTHETIC CONTROL
-  if ("BSC" %in% names(ci)){
-    out$BSC <- coverage(sim[,1:bands], 
-                        ci$BSC$lower_bound, ci$BSC$upper_bound)
+  if ("BSC" %in% names(interv)){
+    out$BSC <- cover(sim[,1:bands], down = interv$BSC$lower_bound,
+                     up = interv$BSC$upper_bound)
   } 
   
   
   ### 6.0 SMAC
-  if ("SMAC" %in% names(ci)){
-    out$SMAC <- coverage(sim[,1:bands], 
-                        ci$SMAC$lower_bound, ci$SMAC$upper_bound)
+  if ("SMAC" %in% names(interv)){
+    out$SMAC <- cover(sim[,1:bands], down = interv$SMAC$lower_bound,
+                      up = interv$SMAC$upper_bound)
   } 
-  
-  library(purrr)
-  out=compact(out)
-  names(out)=names(est)
-  
+
   return(out)
   
 }

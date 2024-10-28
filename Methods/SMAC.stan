@@ -9,6 +9,8 @@ data {
   real<lower=0,upper=1> h[n_t];  // vector of radii, have to be from 0 to 1.
 }
 parameters {
+  // HERE!!! 
+  vector[n_t] beta0;
   matrix[n_t, n_c] beta;  // matrix of coef, n_t=number of bands, n_c=number of control units
   real <lower=0> rho; // Lengthscale for errors, it is squared in the covariance matrix.
   real <lower=0> alpha;  // Variance for the errors.
@@ -47,7 +49,7 @@ model {
   }
   // Linear predictor.
   for (i in 1:t0) {  // loop over time periods.
-    mu[i] =  beta * x[i];
+    mu[i] =  beta0 + beta * x[i];
   }
   //
   // ------- Priors. --------- //
@@ -69,6 +71,8 @@ model {
   alpha_b  ~ inv_gamma(2.7, 0.3);
   // Proportion of outcome error that is spatial.
   w  ~ uniform(0, 1);
+  // Prior for intercepts of outcome model:
+  beta0 ~ normal(0, 1);
   //
   // ------- Outcome model. --------- //
   //
@@ -83,7 +87,7 @@ generated quantities{
   K11 = gp_exp_quad_cov(h, sqrt(w) * alpha_sqrt, rho)  +  diag_matrix(rep_vector((1-w)*alpha, n_t));
   L1 = cholesky_decompose(K11);
   for (i in 1:tt) {
-    munn[i] = beta * xnn[i];
+    munn[i] = beta0 + beta * xnn[i];
   }
   ynn = multi_normal_cholesky_rng(munn, L1);
 }
